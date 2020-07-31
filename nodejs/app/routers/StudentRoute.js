@@ -3,9 +3,9 @@ module.exports = app => {
 
     app.get("/students", students.findAll);
     app.get("/students/:studentId", students.findById);
-    app.delete("/students/:studentId", students.deleteById);
-    app.post("/students", students.create);
-    app.put("/students/:studentId", students.update);
+    app.get("/students/delete/:studentId", students.deleteById);
+    app.get("/students/create/student", students.create);
+    app.get("/students/update/:studentId", students.update);
     app.get("/students/limit/:limit", students.limit);
-    app.post("/students/search",students.search);
+    app.get("/students/search/searchname",students.search);
 }

@@ -38,20 +38,20 @@ exports.findById = (req, res) => {
 
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-    }
+    // if (!req.query) {
+    //     res.status(400).send({
+    //         message: "Content can not be empty!"
+    //     });
+    // }
 
     // Create a Student
     const student = new Student({
-        name: req.body.name,
-        age: req.body.age,
-        sex: req.body.sex,
-        address: req.body.address,
-        classs: req.body.classs,
-        score: req.body.score
+        name: req.query.name,
+        age: req.query.age,
+        sex: req.query.sex,
+        address: req.query.address,
+        classs: req.query.classs,
+        score: req.query.score
     });
 
     // Save Student in the database
@@ -85,15 +85,15 @@ exports.deleteById = (req, res) => {
 
 exports.update = (req, res) => {
     // Validate Request
-    if (!req.body) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-    }
+    // if (!req.body) {
+    //     res.status(400).send({
+    //         message: "Content can not be empty!"
+    //     });
+    // }
 
     Student.updateById(
         req.params.studentId,
-        new Student(req.body),
+        new Student(req.query),
         (err, data) => {
             if (err) {
                 if (err.kind === "not_found") {
@@ -111,7 +111,7 @@ exports.update = (req, res) => {
 };
 
 exports.search = (req,res) => {
-    Student.getSearch(req.body.name,(err,data) => {
+    Student.getSearch(req.query.search,(err,data) => {
         if (err)
         res.status(500).send({
             message: err.message || "Some error occurred while creating the Student."
